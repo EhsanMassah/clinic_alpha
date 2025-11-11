@@ -1,0 +1,16 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Illustration for navigating hormone health</title>
+  <desc id="desc">Curved paths and dots in teal and gold over a soft cream background.</desc>
+  <defs>
+    <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#254672" />
+      <stop offset="100%" stop-color="#5B94AE" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="#FBF4EC" />
+  <path d="M-20 280 C80 180 220 340 330 220 C420 130 540 260 660 140" stroke="url(#pathGradient)" stroke-width="50" stroke-linecap="round" fill="none" opacity="0.18" />
+  <path d="M-30 210 C90 120 200 280 320 190 C420 120 530 230 660 120" stroke="#135F85" stroke-width="22" stroke-linecap="round" fill="none" opacity="0.35" />
+  <circle cx="120" cy="120" r="22" fill="#E0A96D" opacity="0.8" />
+  <circle cx="420" cy="70" r="16" fill="#5B94AE" opacity="0.6" />
+  <circle cx="560" cy="240" r="28" fill="#CBE3ED" opacity="0.9" />
+</svg>

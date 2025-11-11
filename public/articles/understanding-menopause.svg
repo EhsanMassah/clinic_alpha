@@ -1,0 +1,19 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Illustration of flowing shapes representing menopause support</title>
+  <desc id="desc">Soft cream background with layered teal waves and a golden sun.</desc>
+  <defs>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CBE3ED" />
+      <stop offset="100%" stop-color="#5B94AE" />
+    </linearGradient>
+    <linearGradient id="sun" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F7C999" />
+      <stop offset="100%" stop-color="#E0A96D" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="#FBF4EC" />
+  <circle cx="520" cy="92" r="64" fill="url(#sun)" opacity="0.8" />
+  <path d="M0 220 Q160 180 320 220 T640 220 V360 H0 Z" fill="url(#wave)" opacity="0.7" />
+  <path d="M0 260 Q160 300 320 260 T640 260 V360 H0 Z" fill="#135F85" opacity="0.3" />
+  <path d="M0 300 Q140 260 320 300 T640 300 V360 H0 Z" fill="#254672" opacity="0.24" />
+</svg>
