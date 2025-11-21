@@ -9,6 +9,7 @@ import Newsletter from '../components/Newsletter'
 import FAQSection from '../components/FAQSection'
 import { usePageMetadata } from '../hooks/usePageMetadata'
 import SymptomCheckerCTA from '../components/SymptomCheckerCTA'
+import EventPromo from '../components/EventPromo'
 
 export default function Home() {
   usePageMetadata({
@@ -20,6 +21,7 @@ export default function Home() {
   return (
     <main id="main">
       <Hero />
+      <EventPromo />
       <section className="mx-auto max-w-6xl px-6 py-20">
         <div className="relative overflow-hidden rounded-[36px] px-8 py-10 luxe-shell">
           <div className="absolute inset-0 bg-hero-sheen opacity-55" aria-hidden />

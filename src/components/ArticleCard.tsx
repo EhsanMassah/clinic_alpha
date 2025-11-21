@@ -21,15 +21,22 @@ export default function ArticleCard({ title, excerpt, image }: Props) {
         className="pointer-events-none absolute top-6 right-6 inline-flex h-2.5 w-2.5 animate-pulseGlow rounded-full bg-brand-sky/80"
         aria-hidden
       />
-      {image && (
-        <div className="relative overflow-hidden rounded-[22px] border border-white/70 bg-white/70">
+      {image ? (
+        <div className="relative overflow-hidden rounded-[22px] border border-white/70 bg-white/70 aspect-[16/9]">
           <div className="absolute inset-0 bg-hero-sheen opacity-0 transition duration-300 group-hover:opacity-60" aria-hidden />
           <img
             src={image}
             alt={title}
-            className="h-44 w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
             loading="lazy"
           />
+        </div>
+      ) : (
+        <div className="relative aspect-[16/9] overflow-hidden rounded-[22px] border border-white/60 bg-white/80">
+          <div className="absolute inset-0 bg-hero-sheen opacity-60" aria-hidden />
+          <div className="relative flex h-full items-center justify-center text-xs uppercase tracking-[0.3em] text-neutral-500">
+            Image loading
+          </div>
         </div>
       )}
       <h3 className="mt-6 text-[1.35rem] font-semibold leading-snug text-brand-deep">{title}</h3>

@@ -12,7 +12,9 @@ export default function ArticleDetail() {
   const { article, loading, error } = useContentfulArticle(slug)
   const pageTitle = article ? `${article.title} | Clinic Alpha` : 'Article | Clinic Alpha'
   const pageDescription =
-    article?.excerpt ?? 'Explore evidence-led resources on women’s hormone health from Clinic Alpha.'
+    article?.excerpt ?? "Explore evidence-led resources on women's hormone health from Clinic Alpha."
+  const body = article?.body ?? article?.excerpt ?? ''
+  const bodyParagraphs = body.split(/\n\s*\n/).filter((paragraph) => paragraph.trim().length > 0)
 
   usePageMetadata({
     title: pageTitle,
@@ -63,8 +65,23 @@ export default function ArticleDetail() {
           </div>
         </div>
         <p className="relative mt-6 text-lg text-neutral-700">{article.excerpt}</p>
+        {article.image && (
+          <figure className="relative mt-8 overflow-hidden rounded-[28px] border border-white/50 bg-white/70">
+            <div className="absolute inset-0 bg-hero-sheen opacity-50" aria-hidden />
+            <img
+              src={article.image}
+              alt={article.title}
+              className="relative aspect-[16/9] w-full object-cover"
+              loading="lazy"
+            />
+          </figure>
+        )}
         <div className="relative mt-8 space-y-6 text-neutral-700 leading-relaxed">
-          {article.body ?? article.excerpt}
+          {bodyParagraphs.map((paragraph, idx) => (
+            <p key={idx} className="text-base whitespace-pre-line">
+              {paragraph.trim()}
+            </p>
+          ))}
         </div>
         <div className="relative mt-12 flex flex-col gap-6 border-t border-white/50 pt-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
