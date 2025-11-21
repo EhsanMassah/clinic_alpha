@@ -20,19 +20,20 @@
       .wrapper {
         width: 100%;
         table-layout: fixed;
-        background: linear-gradient(150deg, #f4f2ee 0%, #e2f2ff 50%, #fff5e6 100%);
-        padding: 32px 0;
+        background: linear-gradient(140deg, #f7f4ef 0%, #e7f3ff 45%, #fff5e6 100%);
+        padding: 16px 0;
       }
       .main {
         background: #ffffff;
         border-radius: 22px;
-        max-width: 640px;
+        max-width: 720px;
+        width: calc(100% - 32px);
         margin: 0 auto;
         border: 1px solid rgba(25, 76, 125, 0.12);
         box-shadow: 0 22px 48px rgba(10, 21, 45, 0.15);
       }
       .inner {
-        padding: 28px;
+        padding: 26px;
       }
       .logo {
         width: 140px;
@@ -107,7 +108,7 @@
       }
       @media (max-width: 640px) {
         .inner {
-          padding: 22px;
+          padding: 20px 18px;
         }
         h1 {
           font-size: 24px;
@@ -115,6 +116,12 @@
         .pill {
           display: block;
           margin-bottom: 8px;
+        }
+        .main {
+          width: calc(100% - 16px);
+        }
+        .wrapper {
+          padding: 10px 0;
         }
       }
     </style>
@@ -126,12 +133,14 @@
           <table role="presentation" class="main" cellpadding="0" cellspacing="0">
             <tr>
               <td class="inner">
-                <img
-                  src="../images/clinicalpha-logo.png"
-                  alt="Clinic Alpha"
-                  class="logo"
-                  style="max-width: 160px; width: 140px; height: auto;"
-                />
+                <a href="https://clinicalpha.co.uk" target="_blank" rel="noreferrer">
+                  <img
+                    src="https://clinicalpha.co.uk/clinicalpha-logo.png"
+                    alt="Clinic Alpha"
+                    class="logo"
+                    style="max-width: 160px; width: 140px; height: auto;"
+                  />
+                </a>
                 <span class="tag">Menopause Support</span>
                 <h1>Thank you for registering</h1>
                 <p>
@@ -139,11 +148,11 @@
                 </p>
                 <p>
                   Thank you for signing up for our live session, <strong>"Struggling With Menopause Symptoms?"</strong>
-                  on <strong>Friday, 29th November at 10:00 AM</strong>. We are looking forward to welcoming you.
+                  on <strong>Saturday, 29th November at 10:00 AM GMT</strong>. We are looking forward to welcoming you.
                 </p>
                 <div class="pill">
                   <span aria-hidden>📅</span>
-                  <span>Date: 29th November · Time: 10:00 AM · Free to attend</span>
+                  <span>Date: 29th November · Time: 10:00 AM GMT · Free to attend</span>
                 </div>
                 <h2>What to expect</h2>
                 <p>
@@ -158,8 +167,13 @@
                 <p>
                   If you would like us to cover anything specific, reply to this email and we will add it to the agenda.
                 </p>
-                <a class="cta" href="https://forms.gle/aKjkhZeSzswky8Le8" target="_blank" rel="noreferrer">
-                  View your registration
+                <a
+                  class="cta"
+                  href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Struggling%20With%20Menopause%20Symptoms%20%7C%20Clinic%20Alpha&dates=20241129T100000Z/20241129T110000Z&details=Join%20our%20live%20session%20on%20menopause%20support.%20A%20confirmation%20email%20with%20the%20full%20link%20will%20arrive%20closer%20to%20the%20date.%20Time%20zone:%20GMT.&location=Online%20%28link%20to%20follow%29"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Add to your calendar
                 </a>
                 <div class="card">
                   Spaces are limited -- your spot is reserved. If you cannot attend, please reply so we can offer your
@@ -170,7 +184,7 @@
             </tr>
             <tr>
               <td class="footer">
-                Clinic Alpha · London, UK · <a href="https://www.clinic-alpha.co.uk">www.clinic-alpha.co.uk</a>
+                Clinic Alpha · London, UK · <a href="https://clinicalpha.co.uk">clinicalpha.co.uk</a>
               </td>
             </tr>
           </table>

@@ -1,8 +1,4 @@
-export function openCalendlyPopup(calendlyUrl: string) {
+export function openCalendlyPopup(url: string) {
   if (typeof window === 'undefined') return
-  if (window.Calendly?.initPopupWidget) {
-    window.Calendly.initPopupWidget({ url: calendlyUrl })
-  } else {
-    window.open(calendlyUrl, '_blank', 'noopener,noreferrer')
-  }
+  window.open(url, '_blank', 'noopener,noreferrer')
 }
