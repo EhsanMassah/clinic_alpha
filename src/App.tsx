@@ -9,6 +9,7 @@ import HowItWorks from './pages/HowItWorks'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SkipToContent from './components/SkipToContent'
+import ConsentBanner from './components/ConsentBanner'
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <ConsentBanner />
     </div>
   )
 }
