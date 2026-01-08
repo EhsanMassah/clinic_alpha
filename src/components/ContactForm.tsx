@@ -34,13 +34,20 @@ export default function ContactForm({ onSuccess }: ContactFormProps) {
     e.preventDefault()
     if (!validate()) return
     setStatus('submitting')
-    // mock submit
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!response.ok) throw new Error('Request failed')
       setStatus('success')
       setForm({ name: '', email: '', focus: '', message: '', consent: false })
       setErrors({})
       onSuccess?.()
-    }, 700)
+    } catch (err) {
+      setStatus('error')
+    }
   }
 
   if (status === 'success') {
