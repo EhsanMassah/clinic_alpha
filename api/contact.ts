@@ -1,5 +1,5 @@
-import { randomUUID } from 'crypto'
-import { Redis } from '@upstash/redis'
+const { randomUUID } = require('crypto')
+const { Redis } = require('@upstash/redis')
 
 const redis = Redis.fromEnv()
 
@@ -28,7 +28,7 @@ async function readBody(req: any) {
   return JSON.parse(Buffer.concat(chunks).toString('utf8'))
 }
 
-export default async function handler(req: any, res: any) {
+module.exports = async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' })
     return
