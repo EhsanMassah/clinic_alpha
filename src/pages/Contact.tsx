@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ContactForm from '../components/ContactForm'
 import CalendlyInlineWidget from '../components/CalendlyInlineWidget'
 import { usePageMetadata } from '../hooks/usePageMetadata'
@@ -6,6 +6,7 @@ import { CALENDLY_URL } from '../config/site'
 import { openCalendlyPopup } from '../utils/openCalendly'
 
 export default function Contact() {
+  const [submitted, setSubmitted] = useState(false)
   usePageMetadata({
     title: 'Book a Consultation | Clinic Alpha',
     description:
@@ -22,12 +23,14 @@ export default function Contact() {
             Let’s collaborate
           </span>
           <h2 className="mt-4 text-4xl font-display md:text-[2.7rem]">Contact</h2>
-          <p className="mt-4 text-sm text-neutral-700">
-            Share a few details about what you’re exploring — appointments, partnerships, or media. We’ll reply within two
-            business days.
-          </p>
+          {!submitted && (
+            <p className="mt-4 text-sm text-neutral-700">
+              Share a few details about what you’re exploring — appointments, partnerships, or media. We’ll reply within two
+              business days.
+            </p>
+          )}
         </div>
-        <ContactForm />
+        <ContactForm onSuccess={() => setSubmitted(true)} />
       </div>
       <section className="relative mt-12 overflow-hidden rounded-[32px] p-8 luxe-shell">
         <div className="absolute inset-0 bg-gradient-to-r from-brand-tint/25 via-white to-accent-soft/22 opacity-65" aria-hidden />

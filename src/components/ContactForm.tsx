@@ -12,7 +12,11 @@ function isEmail(v: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 }
 
-export default function ContactForm() {
+type ContactFormProps = {
+  onSuccess?: () => void
+}
+
+export default function ContactForm({ onSuccess }: ContactFormProps) {
   const [form, setForm] = useState<FormState>({ name: '', email: '', focus: '', message: '', consent: false })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
@@ -35,7 +39,16 @@ export default function ContactForm() {
       setStatus('success')
       setForm({ name: '', email: '', focus: '', message: '', consent: false })
       setErrors({})
+      onSuccess?.()
     }, 700)
+  }
+
+  if (status === 'success') {
+    return (
+      <div role="status" className="mt-10 max-w-xl rounded-[32px] p-6 text-sm text-brand animate-fadeInUp luxe-card">
+        Thanks — we received your message and will be in touch.
+      </div>
+    )
   }
 
   return (
@@ -148,11 +161,6 @@ export default function ContactForm() {
         </button>
       </div>
 
-      {status === 'success' && (
-        <div role="status" className="mt-4 rounded-2xl p-3 text-sm text-brand luxe-chip">
-          Thanks — we received your message and will be in touch.
-        </div>
-      )}
       {status === 'error' && (
         <div role="alert" className="mt-4 rounded-2xl border border-accent-soft/60 bg-accent-soft/15 p-3 text-sm text-accent-bold">
           Sorry — something went wrong. Please try again later.
