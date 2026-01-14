@@ -10,7 +10,7 @@ const navItems = [
   { label: 'How it works', to: '/how-it-works' },
   { label: 'Contact', to: '/contact' },
   { label: 'About us', to: '/about' },
-  { label: 'Free Endo Guide', to: '/articles' },
+  { label: 'Articles', to: '/articles' },
 ]
 
 export default function Header() {

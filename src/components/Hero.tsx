@@ -91,13 +91,13 @@ export default function Hero() {
         </div>
 
         <div className="relative animate-rise">
-          <div className="mt-6 rounded-3xl border border-white/65 bg-white/90 p-5 text-sm text-brand-deep shadow-[0_20px_60px_rgba(16,38,74,0.12)] backdrop-blur-lg md:mt-0">
-            <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="mt-6 rounded-[28px] border border-rose-200/80 bg-gradient-to-br from-rose-50 via-pink-50 to-rose-200/70 p-7 text-base text-rose-900 shadow-[0_34px_90px_rgba(190,24,93,0.18)] backdrop-blur-lg md:mt-0">
+            <div className="flex flex-wrap items-center justify-between gap-6">
               <div>
-                <div className="text-xs uppercase tracking-[0.4em] text-brand/70">Clients reporting glow</div>
-                <div className="mt-2 text-2xl font-semibold text-brand">92%</div>
+                <div className="text-[11px] uppercase tracking-[0.45em] text-rose-700/80">January offer</div>
+                <div className="mt-2 text-3xl font-semibold text-rose-700 md:text-4xl">50% off</div>
               </div>
-              <div className="text-xs uppercase tracking-[0.3em] text-brand/70">Real stories</div>
+              <div className="text-[11px] uppercase tracking-[0.35em] text-rose-700/80">Appointments in January</div>
             </div>
           </div>
         </div>
