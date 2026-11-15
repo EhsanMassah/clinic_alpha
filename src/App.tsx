@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import Home from './pages/Home'
 import Articles from './pages/Articles'
 import ArticleDetail from './pages/ArticleDetail'
@@ -28,6 +29,7 @@ export default function App() {
       </main>
       <Footer />
       <ConsentBanner />
+      <Analytics />
     </div>
   )
 }
