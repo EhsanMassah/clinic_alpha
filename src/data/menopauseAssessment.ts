@@ -619,3 +619,85 @@ export const DEMO_ANSWERS: Answers = {
       TEXT_LIMITS.questions
     ),
 }
+
+// ---------------------------------------------------------------- server-side validation
+
+const pick = (options: Option[], value: unknown): string =>
+  typeof value === 'string' && options.some((o) => o.id === value) ? value : ''
+
+const pickMany = (options: Option[], value: unknown): string[] =>
+  Array.isArray(value) ? options.filter((o) => value.includes(o.id)).map((o) => o.id) : []
+
+const text = (value: unknown, limit: number): string =>
+  typeof value === 'string'
+    ? value
+        // eslint-disable-next-line no-control-regex
+        .replace(/[\u0000-\u0008\u000b-\u001f\u007f]/g, '')
+        .trim()
+        .slice(0, limit)
+    : ''
+
+const scale = (value: unknown): number | null =>
+  typeof value === 'number' && Number.isInteger(value) && value >= 0 && value <= 4 ? value : null
+
+const measure = (value: unknown): string => {
+  const n = typeof value === 'string' || typeof value === 'number' ? parseFloat(String(value)) : NaN
+  return Number.isFinite(n) && n > 0 && n < 400 ? String(Math.round(n * 10) / 10) : ''
+}
+
+/**
+ * Rebuilds an Answers object from untrusted input, keeping only known option ids, in-range
+ * scores and length-limited text. Returns null when the questionnaire is not complete.
+ * Used by the email endpoint so it can only ever send a genuine report.
+ */
+export function sanitizeAnswers(raw: unknown): Answers | null {
+  if (!raw || typeof raw !== 'object') return null
+  const r = raw as Record<string, unknown>
+  const rawMrs = r.mrs && typeof r.mrs === 'object' ? (r.mrs as Record<string, unknown>) : {}
+
+  const mrs: Record<string, number> = {}
+  for (const item of MRS_ITEMS) {
+    const value = scale(rawMrs[item.id])
+    if (value === null) return null
+    mrs[item.id] = value
+  }
+
+  const dob = typeof r.dob === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(r.dob) ? r.dob : ''
+  const age = ageFromDob(dob)
+  const cycle = pick(CYCLE_OPTIONS, r.cycle)
+  if (age === null || age < 18 || age > 100 || !cycle) return null
+
+  return {
+    firstName: text(r.firstName, 30),
+    lastName: text(r.lastName, 30),
+    dob,
+    heightCm: measure(r.heightCm),
+    weightKg: measure(r.weightKg),
+    cycle,
+    lastPeriod: text(r.lastPeriod, TEXT_LIMITS.lastPeriod),
+    ovaries: pick(OVARY_OPTIONS, r.ovaries),
+    contraception: pick(CONTRACEPTION_OPTIONS, r.contraception),
+    bleeding: pickMany(BLEEDING_OPTIONS, r.bleeding),
+    mrs,
+    topConcerns: pickMany(
+      MRS_ITEMS.map((item) => ({ id: item.id, label: item.label })),
+      r.topConcerns
+    ).slice(0, 3),
+    otherSymptoms: pickMany(OTHER_SYMPTOM_OPTIONS, r.otherSymptoms),
+    duration: pick(DURATION_OPTIONS, r.duration),
+    impactWork: scale(r.impactWork),
+    impactHome: scale(r.impactHome),
+    impactWellbeing: scale(r.impactWellbeing),
+    conditions: pickMany(CONDITION_OPTIONS, r.conditions),
+    family: pickMany(FAMILY_OPTIONS, r.family),
+    smoking: pick(SMOKING_OPTIONS, r.smoking),
+    alcohol: pick(ALCOHOL_OPTIONS, r.alcohol),
+    exercise: pick(EXERCISE_OPTIONS, r.exercise),
+    medications: text(r.medications, TEXT_LIMITS.medications),
+    hrt: pick(HRT_OPTIONS, r.hrt),
+    hrtDetail: text(r.hrtDetail, TEXT_LIMITS.hrtDetail),
+    tried: pickMany(TRIED_OPTIONS, r.tried),
+    discuss: pickMany(DISCUSS_OPTIONS, r.discuss),
+    questions: text(r.questions, TEXT_LIMITS.questions),
+  }
+}

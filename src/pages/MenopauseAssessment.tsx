@@ -3,6 +3,7 @@ import { routeMeta, usePageMetadata } from '../hooks/usePageMetadata'
 import { CALENDLY_URL } from '../config/site'
 import { openCalendlyPopup } from '../utils/openCalendly'
 import AssessmentReport from '../components/assessment/AssessmentReport'
+import EmailReport from '../components/assessment/EmailReport'
 import {
   ALCOHOL_OPTIONS,
   Answers,
@@ -319,8 +320,8 @@ export default function MenopauseAssessment() {
           </span>
           <h1 className="mt-4 font-display text-3xl text-ca-deep md:text-4xl">Take this to your GP appointment</h1>
           <p className="mt-3 text-sm text-ca-ink700">
-            Print it, or choose “Save as PDF” in the print window to keep a copy on your phone. Your answers stay on this
-            device and disappear when you close or refresh this page, so save your report now.
+            Print it, save it as a PDF, or email it to yourself. Your answers stay on this device unless you choose to
+            email the report, and they disappear when you close or refresh this page, so keep a copy now.
           </p>
 
           {(showUrgentBleeding || showMoodSupport) && (
@@ -351,6 +352,12 @@ export default function MenopauseAssessment() {
               </svg>
               Print or save as PDF
             </button>
+            <a
+              href="#email-report"
+              className="inline-flex items-center rounded-full border border-ca-line bg-white px-5 py-3 text-sm font-semibold text-ca-brand transition hover:border-ca-sky/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-sky/40"
+            >
+              Email it to me
+            </a>
             <button
               type="button"
               onClick={() => {
@@ -372,6 +379,8 @@ export default function MenopauseAssessment() {
         </div>
 
         <AssessmentReport answers={answers} result={result} completedOn={completedOn} />
+
+        <EmailReport answers={answers} />
 
         <div className="mx-auto mt-10 max-w-[794px] rounded-[28px] p-7 luxe-shell print:hidden">
           <h2 className="font-display text-2xl text-ca-deep">Would you like to talk it through first?</h2>
@@ -415,11 +424,11 @@ export default function MenopauseAssessment() {
               ],
               [
                 'Private by design',
-                'Your answers never leave this device. Nothing is sent to us or stored, and no email address is needed.',
+                'Your answers stay on this device. Nothing is sent to us unless you choose to email yourself the report, and your answers are never stored.',
               ],
               [
                 'A report you can hand over',
-                'Print it or save it as a PDF. It is set out the way a clinician reads: summary first, detail after.',
+                'Print it, save it as a PDF, or email it to yourself. It is set out the way a clinician reads: summary first, detail after.',
               ],
             ].map(([title, body], index) => (
               <li key={title} className="flex gap-4">

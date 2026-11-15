@@ -41,7 +41,7 @@ export default function AssessmentPromo() {
                   <path d="M5 10h10m0 0-4-4m4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                 </svg>
               </Link>
-              <p className="text-sm text-white/75">Private: your answers never leave your device.</p>
+              <p className="text-sm text-white/75">Private: nothing is sent unless you email yourself the report.</p>
             </div>
           </div>
 
