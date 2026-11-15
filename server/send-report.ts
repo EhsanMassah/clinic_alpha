@@ -9,7 +9,7 @@
  * opts in to be contacted, only their name and email address are saved.
  *
  * Environment: RESEND_API_KEY (required), REPORT_FROM_EMAIL, REPORT_REPLY_TO (optional),
- * UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN (rate limiting and opt-in list).
+ * REPORT_KV_REST_API_URL / REPORT_KV_REST_API_TOKEN (rate limiting and opt-in list).
  */
 import { createHash } from 'crypto'
 import { Redis } from '@upstash/redis'
@@ -88,7 +88,9 @@ async function handler(req: any, res: any) {
 
   let redis: Redis
   try {
-    redis = Redis.fromEnv()
+    const url = process.env.REPORT_KV_REST_API_URL
+    const token = process.env.REPORT_KV_REST_API_TOKEN
+    redis = url && token ? new Redis({ url, token }) : Redis.fromEnv()
     const forwarded = String(req.headers?.['x-forwarded-for'] ?? '').split(',')[0].trim() || 'unknown'
     const emailHash = createHash('sha256').update(email).digest('hex').slice(0, 32)
     const allowed =

@@ -826,7 +826,9 @@ async function handler(req, res) {
   }
   let redis;
   try {
-    redis = import_redis.Redis.fromEnv();
+    const url = process.env.REPORT_KV_REST_API_URL;
+    const token = process.env.REPORT_KV_REST_API_TOKEN;
+    redis = url && token ? new import_redis.Redis({ url, token }) : import_redis.Redis.fromEnv();
     const forwarded = String(req.headers?.["x-forwarded-for"] ?? "").split(",")[0].trim() || "unknown";
     const emailHash = (0, import_crypto.createHash)("sha256").update(email).digest("hex").slice(0, 32);
     const allowed = await withinLimit(redis, `report_rl:ip:${forwarded}`, LIMIT_PER_IP_PER_HOUR, 3600) && await withinLimit(redis, `report_rl:email:${emailHash}`, LIMIT_PER_EMAIL_PER_DAY, 86400);

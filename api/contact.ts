@@ -1,7 +1,9 @@
 const { randomUUID } = require('crypto')
 const { Redis } = require('@upstash/redis')
 
-const redis = Redis.fromEnv()
+const redisUrl = process.env.REPORT_KV_REST_API_URL
+const redisToken = process.env.REPORT_KV_REST_API_TOKEN
+const redis = redisUrl && redisToken ? new Redis({ url: redisUrl, token: redisToken }) : Redis.fromEnv()
 
 type ContactPayload = {
   name?: string
