@@ -546,10 +546,6 @@
     background: #fff !important;
   }
 
-  body::before {
-    display: none !important;
-  }
-
   .rpt-frame {
     max-width: none;
     margin: 0;

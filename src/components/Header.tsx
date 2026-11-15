@@ -17,7 +17,7 @@ export default function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="print:hidden sticky top-0 z-40 border-b border-white/60 bg-white/90 backdrop-blur-md text-brand-deep shadow-[0_12px_32px_rgba(16,38,74,0.08)]">
+    <header className="print:hidden sticky top-0 z-40 border-b border-white/60 bg-white/50 backdrop-blur-md text-brand-deep shadow-[0_12px_32px_rgba(16,38,74,0.08)]">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link
           to="/"
@@ -33,7 +33,7 @@ export default function Header() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `relative overflow-hidden text-sm font-medium uppercase tracking-[0.28em] text-brand-deep/70 transition duration-300 after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:content-[''] after:rounded-full after:bg-gradient-to-r after:from-brand-sky after:to-accent after:opacity-0 after:transition-all after:duration-300 hover:text-brand-deep hover:after:w-full hover:after:opacity-100 ${
+                `relative overflow-hidden text-sm font-semibold uppercase tracking-[0.28em] text-brand-deep/70 transition duration-300 after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-0 after:content-[''] after:rounded-full after:bg-gradient-to-r after:from-brand-sky after:to-accent after:opacity-0 after:transition-all after:duration-300 hover:text-brand-deep hover:after:w-full hover:after:opacity-100 ${
                   isActive ? 'text-brand-deep after:w-full after:opacity-100' : ''
                 }`
               }

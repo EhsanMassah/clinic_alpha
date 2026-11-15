@@ -12,10 +12,12 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import SkipToContent from './components/SkipToContent'
 import ConsentBanner from './components/ConsentBanner'
+import LiquidBackground from './components/LiquidBackground'
 
 export default function App() {
   return (
     <div className="relative min-h-screen flex flex-col font-sans text-brand-deep">
+      <LiquidBackground />
       <SkipToContent />
       <Header />
       <main className="flex-1 relative z-10">
