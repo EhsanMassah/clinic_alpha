@@ -6,6 +6,8 @@ import ArticleDetail from './pages/ArticleDetail'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import HowItWorks from './pages/HowItWorks'
+import MenopauseAssessment from './pages/MenopauseAssessment'
+import NotFound from './pages/NotFound'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SkipToContent from './components/SkipToContent'
@@ -24,6 +26,8 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/menopause-assessment" element={<MenopauseAssessment />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

@@ -21,7 +21,7 @@ export default function ConsentBanner() {
   if (!visible) return null
 
   return (
-    <div className="fixed inset-x-0 bottom-4 z-50 px-3 sm:px-6">
+    <div className="print:hidden fixed inset-x-0 bottom-4 z-50 px-3 sm:px-6">
       <div className="mx-auto flex max-w-4xl items-center gap-3 rounded-2xl border border-brand/10 bg-white/95 px-4 py-3 shadow-glow backdrop-blur">
         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-tint text-brand-deep shadow-sm">
           <svg

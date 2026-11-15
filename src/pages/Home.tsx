@@ -7,19 +7,17 @@ import PartnersStrip from '../components/PartnersStrip'
 import Testimonials from '../components/Testimonials'
 import Newsletter from '../components/Newsletter'
 import FAQSection from '../components/FAQSection'
-import { usePageMetadata } from '../hooks/usePageMetadata'
+import { routeMeta, usePageMetadata } from '../hooks/usePageMetadata'
 import SymptomCheckerCTA from '../components/SymptomCheckerCTA'
 import EventPromo from '../components/EventPromo'
+import AssessmentPromo from '../components/AssessmentPromo'
 
 export default function Home() {
-  usePageMetadata({
-    title: 'Clinic Alpha | Functional Hormone Health & Menopause Clinic',
-    description:
-      'Discover Clinic Alpha’s functional medicine approach to women’s hormone health, perimenopause, and menopause care. Explore resources and book a consultation.',
-  })
+  usePageMetadata(routeMeta('/'))
 
   return (
     <main id="main">
+      <AssessmentPromo />
       <Hero />
       <EventPromo />
       <section className="mx-auto max-w-6xl px-6 py-20">

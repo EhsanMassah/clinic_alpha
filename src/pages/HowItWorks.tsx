@@ -1,5 +1,6 @@
 import React from 'react'
 import howItWorksImage from '../../images/how-it-works.avif'
+import { routeMeta, usePageMetadata } from '../hooks/usePageMetadata'
 
 const steps = [
   {
@@ -47,6 +48,8 @@ const steps = [
 ]
 
 export default function HowItWorks() {
+  usePageMetadata(routeMeta('/how-it-works'))
+
   return (
     <div className="bg-gradient-to-b from-cream-soft via-white to-brand-tint/15 text-brand-deep">
       <section className="relative overflow-hidden border-b border-brand-tint/30 py-24 shadow-[0_24px_80px_rgba(16,38,74,0.08)]">
@@ -63,7 +66,7 @@ export default function HowItWorks() {
         <div className="pointer-events-none absolute inset-0 bg-hero-radial opacity-20" aria-hidden />
         <div className="relative mx-auto flex max-w-4xl flex-col gap-6 px-6 text-center md:px-10">
           <p className="text-xs uppercase tracking-[0.5em] text-brand/70">Your next steps</p>
-          <h1 className="font-display text-4xl font-semibold md:text-5xl">How it works</h1>
+          <h1 className="font-display text-4xl font-semibold md:text-5xl">How your menopause consultation works</h1>
           <p className="mx-auto max-w-3xl text-lg text-neutral-700">
             A transparent pathway that keeps you supported from first hello through long-term integration. Follow the
             timeline to see how we journey together.

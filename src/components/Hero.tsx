@@ -24,7 +24,7 @@ export default function Hero() {
           <img
             ref={imgRef}
             src={homepageImage}
-            alt="Clinic Alpha consultation scene"
+            alt="A Clinic Alpha menopause and hormone health consultation"
             loading="eager"
             className="hero-img relative h-full w-full object-cover parallax"
           />
@@ -34,7 +34,7 @@ export default function Hero() {
       <div className="relative mx-auto grid max-w-6xl items-start gap-12 px-6 pt-12 md:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
         <div className="relative z-10 max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/80 px-5 py-1.5 text-xs uppercase tracking-[0.5em] text-brand/80 backdrop-blur-sm animate-fadeInUp">
-            Functional wellness studio
+            Menopause &amp; hormone health clinic
           </span>
           <h1 className="mt-7 text-4xl font-display font-semibold leading-[1.05] tracking-tight md:text-6xl animate-fadeInUp">
             Precision hormone care for grounded nervous systems.
@@ -91,13 +91,13 @@ export default function Hero() {
         </div>
 
         <div className="relative animate-rise">
-          <div className="mt-6 rounded-[28px] border border-rose-200/80 bg-gradient-to-br from-rose-50 via-pink-50 to-rose-200/70 p-7 text-base text-rose-900 shadow-[0_34px_90px_rgba(190,24,93,0.18)] backdrop-blur-lg md:mt-0">
+          <div className="mt-6 rounded-[28px] border border-amber-300/40 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 p-7 text-base text-white shadow-[0_34px_90px_rgba(0,0,0,0.35)] md:mt-0">
             <div className="flex flex-wrap items-center justify-between gap-6">
               <div>
-                <div className="text-[11px] uppercase tracking-[0.45em] text-rose-700/80">January offer</div>
-                <div className="mt-2 text-3xl font-semibold text-rose-700 md:text-4xl">50% off</div>
+                <div className="text-[11px] uppercase tracking-[0.45em] text-amber-300">Black Friday offer</div>
+                <div className="mt-2 text-3xl font-semibold text-white md:text-4xl">50% off</div>
               </div>
-              <div className="text-[11px] uppercase tracking-[0.35em] text-rose-700/80">Appointments in January</div>
+              <div className="text-[11px] uppercase tracking-[0.35em] text-amber-200/90">Appointments in November</div>
             </div>
           </div>
         </div>

@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
 import ContactForm from '../components/ContactForm'
 import CalendlyInlineWidget from '../components/CalendlyInlineWidget'
-import { usePageMetadata } from '../hooks/usePageMetadata'
+import { routeMeta, usePageMetadata } from '../hooks/usePageMetadata'
 import { CALENDLY_URL } from '../config/site'
 import { openCalendlyPopup } from '../utils/openCalendly'
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
-  usePageMetadata({
-    title: 'Book a Consultation | Clinic Alpha',
-    description:
-      'Contact Clinic Alpha to discuss personalised hormone health support. Submit the intake form or book a discovery call directly through Calendly.',
-  })
+  usePageMetadata(routeMeta('/contact'))
 
   return (
     <main id="main" className="mx-auto max-w-6xl px-6 py-20">
@@ -22,7 +18,7 @@ export default function Contact() {
             <span className="h-2 w-2 rounded-full bg-brand-sky" aria-hidden />
             Let’s collaborate
           </span>
-          <h2 className="mt-4 text-4xl font-display md:text-[2.7rem]">Contact</h2>
+          <h1 className="mt-4 text-4xl font-display md:text-[2.7rem]">Contact Clinic Alpha</h1>
           {!submitted && (
             <p className="mt-4 text-sm text-neutral-700">
               Share a few details about what you’re exploring — appointments, partnerships, or media. We’ll reply within two

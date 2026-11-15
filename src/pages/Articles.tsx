@@ -2,7 +2,7 @@
 import React, { useMemo, useState } from 'react'
 import ArticleList from '../components/ArticleList'
 import TagFilter from '../components/TagFilter'
-import { usePageMetadata } from '../hooks/usePageMetadata'
+import { routeMeta, usePageMetadata } from '../hooks/usePageMetadata'
 import { useContentfulArticles } from '../hooks/useContentfulArticles'
 import type { CmsArticle } from '../services/contentful'
 
@@ -11,11 +11,7 @@ const PAGE_SIZE = 6
 export default function Articles() {
   const [activeTag, setActiveTag] = useState<string | null>(null)
   const [page, setPage] = useState(1)
-  usePageMetadata({
-    title: 'Hormone Health Articles & Menopause Guides | Clinic Alpha',
-    description:
-      'Browse Clinic Alpha’s library of women’s hormone health insights, menopause guides, and functional medicine protocols.',
-  })
+  usePageMetadata(routeMeta('/articles'))
 
   const { articles, loading, error } = useContentfulArticles()
   const tags = useMemo(() => Array.from(new Set(articles.flatMap((a) => a.tags || []))), [articles])
@@ -37,7 +33,7 @@ export default function Articles() {
               <span className="h-2 w-2 rounded-full bg-brand-sky" aria-hidden />
               Library
             </span>
-            <h2 className="mt-4 text-4xl font-display text-brand-deep md:text-[2.6rem]">Articles</h2>
+            <h1 className="mt-4 text-4xl font-display text-brand-deep md:text-[2.6rem]">Menopause &amp; hormone health articles</h1>
           </div>
           <p className="max-w-xl text-sm text-neutral-700">
             Filter by topic or move sequentially — each article blends research-grade insight with lived practice pearls.

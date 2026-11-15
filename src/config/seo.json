@@ -1,0 +1,37 @@
+{
+  "siteUrl": "https://clinicalpha.co.uk",
+  "siteName": "Clinic Alpha",
+  "defaultImage": "/social-share.jpg",
+  "routes": {
+    "/": {
+      "title": "Menopause & Hormone Health Clinic UK | Clinic Alpha",
+      "description": "Clinic Alpha is a UK menopause and hormone health clinic offering personalised perimenopause and menopause consultations. Try our free symptom checker or book online.",
+      "heading": "Menopause and hormone health clinic"
+    },
+    "/menopause-assessment": {
+      "title": "Free Menopause Symptom Checker & GP Report | Clinic Alpha",
+      "description": "Answer a five-minute menopause questionnaire based on the Menopause Rating Scale and NICE guidance, and get a clear two-page symptom report to take to your GP. Free and private.",
+      "heading": "Free menopause symptom checker and GP report"
+    },
+    "/how-it-works": {
+      "title": "How It Works: Your Menopause Consultation | Clinic Alpha",
+      "description": "See how a Clinic Alpha menopause consultation works, from your first enquiry and personalised intake to a 45-minute consultation, tailored management plan and follow-up.",
+      "heading": "How a Clinic Alpha menopause consultation works"
+    },
+    "/about": {
+      "title": "About Clinic Alpha | Menopause & Hormone Health Clinic",
+      "description": "Meet Clinic Alpha: evidence-led, personalised care for women's hormone health through perimenopause and menopause. Learn about our approach and what we stand for.",
+      "heading": "About Clinic Alpha"
+    },
+    "/contact": {
+      "title": "Contact Us & Book a Menopause Consultation | Clinic Alpha",
+      "description": "Get in touch with Clinic Alpha to book a menopause or hormone health consultation. Send us a message or contact us on WhatsApp and we will reply within two working days.",
+      "heading": "Contact Clinic Alpha"
+    },
+    "/articles": {
+      "title": "Menopause & Hormone Health Articles | Clinic Alpha",
+      "description": "Evidence-led guides to perimenopause, menopause, HRT, sleep, thyroid and hormone health from the Clinic Alpha team. Practical advice you can act on.",
+      "heading": "Menopause and hormone health articles"
+    }
+  }
+}

@@ -16,6 +16,20 @@ module.exports = {
           soft: 'rgb(var(--cream-soft) / <alpha-value>)',
           warm: 'rgb(var(--cream-warm) / <alpha-value>)',
         },
+        // Literal palette for the menopause assessment pages. The var()-based colours in this
+        // file expand to comma-separated rgb() with a slash alpha, which browsers reject.
+        ca: {
+          deep: 'rgb(16 38 74 / <alpha-value>)',
+          brand: 'rgb(25 76 125 / <alpha-value>)',
+          sky: 'rgb(104 198 255 / <alpha-value>)',
+          mist: 'rgb(188 225 255 / <alpha-value>)',
+          tint: 'rgb(226 242 255 / <alpha-value>)',
+          accent: 'rgb(251 188 94 / <alpha-value>)',
+          ink700: 'rgb(46 58 81 / <alpha-value>)',
+          ink500: 'rgb(92 103 128 / <alpha-value>)',
+          line: 'rgb(213 219 231 / <alpha-value>)',
+          wash: 'rgb(240 244 248 / <alpha-value>)',
+        },
         accent: {
           DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
           soft: 'rgb(var(--accent-soft) / <alpha-value>)',

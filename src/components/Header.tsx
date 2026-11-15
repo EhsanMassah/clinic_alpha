@@ -17,7 +17,7 @@ export default function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/60 bg-white/90 backdrop-blur-md text-brand-deep shadow-[0_12px_32px_rgba(16,38,74,0.08)]">
+    <header className="print:hidden sticky top-0 z-40 border-b border-white/60 bg-white/90 backdrop-blur-md text-brand-deep shadow-[0_12px_32px_rgba(16,38,74,0.08)]">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link
           to="/"

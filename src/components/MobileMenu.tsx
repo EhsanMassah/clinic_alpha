@@ -7,6 +7,7 @@ export default function MobileMenu({ open, onClose }: { open: boolean; onClose: 
   const navItems = [
     { label: 'Home', to: '/' },
     { label: 'How it works', to: '/how-it-works' },
+    { label: 'Symptom report', to: '/menopause-assessment' },
     { label: 'Contact', to: '/contact' },
     { label: 'About us', to: '/about' },
     { label: 'Articles', to: '/articles' },

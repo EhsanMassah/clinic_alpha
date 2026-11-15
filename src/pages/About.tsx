@@ -1,12 +1,8 @@
 import React from 'react'
-import { usePageMetadata } from '../hooks/usePageMetadata'
+import { routeMeta, usePageMetadata } from '../hooks/usePageMetadata'
 
 export default function About() {
-  usePageMetadata({
-    title: 'About Clinic Alpha | Functional Hormone Specialists',
-    description:
-      'Learn about Clinic Alpha’s functional medicine team, our ethos, and how we support women through perimenopause and menopause.',
-  })
+  usePageMetadata(routeMeta('/about'))
 
   return (
     <main id="main" className="mx-auto max-w-6xl px-6 py-20">
@@ -17,7 +13,7 @@ export default function About() {
             <span className="h-2 w-2 rounded-full bg-brand-sky" aria-hidden />
             Our ethos
           </span>
-          <h2 className="mt-4 text-4xl font-display md:text-[2.7rem]">About</h2>
+          <h1 className="mt-4 text-4xl font-display md:text-[2.7rem]">About Clinic Alpha</h1>
           <p className="mt-4 text-sm text-neutral-700 leading-relaxed">
             Clinic Alpha reimagines the hormonal care journey with design-led storytelling, science-backed guidance, and
             accessible tools. We believe in slow, intentional practices that empower patients to become collaborators in

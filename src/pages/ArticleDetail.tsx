@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import SocialShare from '../components/SocialShare'
 import RelatedArticles from '../components/RelatedArticles'
 import { CALENDLY_URL } from '../config/site'
 import { openCalendlyPopup } from '../utils/openCalendly'
-import { usePageMetadata } from '../hooks/usePageMetadata'
+import { absoluteUrl, usePageMetadata } from '../hooks/usePageMetadata'
+import { useStructuredData } from '../hooks/useStructuredData'
+import seo from '../config/seo.json'
 import { useContentfulArticle } from '../hooks/useContentfulArticles'
 
 export default function ArticleDetail() {
@@ -19,7 +21,41 @@ export default function ArticleDetail() {
   usePageMetadata({
     title: pageTitle,
     description: pageDescription,
+    path: slug ? `/articles/${slug}` : undefined,
+    image: article?.image,
+    type: 'article',
+    noindex: !loading && !article,
   })
+
+  const articleJson = useMemo(() => {
+    if (!article) return null
+    const url = absoluteUrl(`/articles/${article.slug}`)
+    return JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'BlogPosting',
+          headline: article.title,
+          description: article.excerpt,
+          image: absoluteUrl(article.image ?? seo.defaultImage),
+          ...(article.publishDate ? { datePublished: article.publishDate } : {}),
+          mainEntityOfPage: url,
+          inLanguage: 'en-GB',
+          author: { '@type': 'Organization', name: seo.siteName, url: `${seo.siteUrl}/` },
+          publisher: { '@id': `${seo.siteUrl}/#organization` },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: absoluteUrl('/') },
+            { '@type': 'ListItem', position: 2, name: 'Articles', item: absoluteUrl('/articles') },
+            { '@type': 'ListItem', position: 3, name: article.title, item: url },
+          ],
+        },
+      ],
+    })
+  }, [article])
+  useStructuredData(articleJson, 'ld-page')
 
   if (loading) {
     return (
@@ -35,7 +71,7 @@ export default function ArticleDetail() {
     return (
       <main id="main" className="mx-auto max-w-6xl px-6 py-20">
         <div className="rounded-[28px] p-8 luxe-card">
-          <h2 className="text-2xl font-display text-brand-deep">Article not found</h2>
+          <h1 className="text-2xl font-display text-brand-deep">Article not found</h1>
           <p className="mt-2 text-sm text-neutral-700">
             Try our <Link to="/articles" className="link-underline">articles</Link> list.
           </p>

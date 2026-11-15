@@ -1,0 +1,578 @@
+/*
+ * Two-page A4 GP report.
+ * On screen each sheet is laid out at true A4 size (794 x 1123 CSS px) and scaled to fit
+ * its container, so the preview matches the printout exactly.
+ */
+
+.rpt-frame {
+  position: relative;
+  margin: 0 auto 28px;
+  width: 100%;
+  max-width: 794px;
+}
+
+.rpt-sheet {
+  --ink: rgb(16, 38, 74);
+  --ink-soft: rgb(70, 84, 110);
+  --line: rgb(213, 221, 234);
+  --wash: rgb(244, 248, 253);
+  --brand: rgb(25, 76, 125);
+  --amber: rgb(203, 133, 32);
+  --amber-wash: rgb(255, 247, 232);
+
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 794px;
+  height: 1123px;
+  padding: 51px 45px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: top left;
+  background: #fff;
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  border-radius: 4px;
+  box-shadow: 0 30px 80px rgba(10, 21, 45, 0.18), 0 0 0 1px rgba(16, 38, 74, 0.06);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.rpt-sheet *,
+.rpt-sheet *::before,
+.rpt-sheet *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- header ---------- */
+.rpt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.rpt-head img {
+  height: 46px;
+  width: auto;
+}
+
+.rpt-head-title {
+  text-align: right;
+}
+
+.rpt-title {
+  margin: 0;
+  font-family: 'Fraunces', 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.rpt-subtitle {
+  margin: 3px 0 0;
+  font-size: 10px;
+  color: var(--ink-soft);
+}
+
+.rpt-head-compact {
+  align-items: flex-end;
+  padding-bottom: 8px;
+}
+
+.rpt-head-compact .rpt-title {
+  font-size: 15px;
+}
+
+/* ---------- patient strip ---------- */
+.rpt-patient {
+  display: grid;
+  grid-template-columns: 1.5fr 1.2fr 1.5fr 1fr;
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--wash);
+}
+
+.rpt-patient > div {
+  padding: 7px 11px;
+  border-left: 1px solid var(--line);
+  min-width: 0;
+}
+
+.rpt-patient > div:first-child {
+  border-left: 0;
+}
+
+.rpt-label {
+  display: block;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.rpt-value {
+  display: block;
+  margin-top: 1px;
+  font-size: 12px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- sections ---------- */
+.rpt-section {
+  margin-top: 11px;
+}
+
+.rpt-h2 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 6px;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.rpt-h2 small {
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink-soft);
+}
+
+/* ---------- summary tiles ---------- */
+.rpt-summary {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.rpt-tile {
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-width: 0;
+}
+
+.rpt-tile-main {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.rpt-tile-main .rpt-label {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.rpt-tile-big {
+  display: block;
+  margin-top: 3px;
+  font-family: 'Fraunces', 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.rpt-tile-score {
+  display: block;
+  margin-top: 2px;
+  font-family: 'Fraunces', 'Playfair Display', serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.rpt-tile-score span {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.rpt-tile-note {
+  display: block;
+  margin-top: 2px;
+  font-size: 9.5px;
+  line-height: 1.3;
+}
+
+.rpt-tile-main .rpt-tile-note {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.rpt-sev {
+  display: inline-block;
+  margin-top: 3px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.rpt-sev[data-sev='Moderate'] {
+  background: rgb(226, 238, 252);
+  border-color: rgb(170, 200, 235);
+}
+
+.rpt-sev[data-sev='Severe'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+/* ---------- symptom table ---------- */
+.rpt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rpt-table th {
+  padding: 0 6px 4px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--ink);
+}
+
+.rpt-table td {
+  padding: 3px 6px;
+  line-height: 1.3;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.rpt-table .rpt-group td {
+  padding: 4px 6px 3px;
+  background: var(--wash);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.rpt-table .rpt-group td:last-child {
+  text-align: right;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.rpt-sym {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.rpt-sym em {
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--amber-wash);
+  border: 1px solid rgba(203, 133, 32, 0.45);
+  font-size: 8px;
+  font-style: normal;
+  font-weight: 700;
+  color: rgb(133, 82, 10);
+  white-space: nowrap;
+}
+
+.rpt-sym-desc {
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.rpt-bar {
+  display: flex;
+  gap: 3px;
+  width: 96px;
+}
+
+.rpt-bar i {
+  flex: 1;
+  height: 8px;
+  border-radius: 2px;
+  background: rgb(228, 234, 243);
+}
+
+.rpt-bar i[data-on='1'] {
+  background: var(--brand);
+}
+
+.rpt-bar[data-level='3'] i[data-on='1'],
+.rpt-bar[data-level='4'] i[data-on='1'] {
+  background: var(--ink);
+}
+
+.rpt-rating {
+  width: 92px;
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
+.rpt-rating b {
+  display: inline-block;
+  width: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- generic layout ---------- */
+.rpt-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.rpt-cols-wide-right {
+  grid-template-columns: 1fr 1.25fr;
+}
+
+.rpt-cols-wide-left {
+  grid-template-columns: 1.25fr 1fr;
+}
+
+.rpt-trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.rpt-trio b {
+  display: block;
+  font-weight: 600;
+}
+
+.rpt-box {
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-width: 0;
+}
+
+.rpt-kv {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 3px 10px;
+  margin: 0;
+}
+
+.rpt-kv dt {
+  font-size: 9.5px;
+  color: var(--ink-soft);
+}
+
+.rpt-kv dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.rpt-text {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.rpt-muted {
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+.rpt-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rpt-list li {
+  position: relative;
+  padding-left: 11px;
+}
+
+.rpt-list li::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: 0.55em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+
+.rpt-list-2col {
+  columns: 2;
+  column-gap: 16px;
+}
+
+.rpt-list-2col li {
+  break-inside: avoid;
+}
+
+.rpt-impact {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 10px;
+  align-items: center;
+}
+
+.rpt-impact .rpt-bar {
+  width: 74px;
+}
+
+.rpt-impact > b {
+  text-align: right;
+}
+
+/* ---------- points for discussion ---------- */
+.rpt-flags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.rpt-flags li {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 10px;
+  padding: 4px 11px;
+  border-top: 1px solid var(--line);
+  border-left: 3px solid transparent;
+}
+
+.rpt-flags li:first-child {
+  border-top: 0;
+}
+
+.rpt-flags li[data-priority='1'] {
+  background: var(--amber-wash);
+  border-left-color: var(--amber);
+}
+
+.rpt-flag-tag {
+  align-self: start;
+  margin-top: 1px;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.rpt-flags li[data-priority='1'] .rpt-flag-tag {
+  color: rgb(133, 82, 10);
+}
+
+.rpt-flags b {
+  font-weight: 700;
+}
+
+/* ---------- clinician notes ---------- */
+.rpt-notes {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 60px;
+}
+
+.rpt-notes-box {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 21px, var(--line) 21px, var(--line) 22px);
+  background-position: 0 4px;
+}
+
+/* ---------- footer ---------- */
+.rpt-foot {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.rpt-notes + .rpt-foot {
+  margin-top: 10px;
+}
+
+.rpt-foot-refs {
+  margin: 0 0 6px;
+  font-size: 8.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.rpt-foot-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  font-size: 8.5px;
+  color: var(--ink-soft);
+}
+
+/* ---------- print ---------- */
+@page {
+  size: A4;
+  margin: 12mm;
+}
+
+@media print {
+  html,
+  body,
+  #root {
+    height: auto !important;
+    background: #fff !important;
+  }
+
+  body::before {
+    display: none !important;
+  }
+
+  .rpt-frame {
+    max-width: none;
+    margin: 0;
+    height: auto !important;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .rpt-frame:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+
+  .rpt-sheet {
+    position: static;
+    width: 100%;
+    /* 297mm page - 24mm margins = 273mm; 3mm slack avoids a spill onto a blank page */
+    height: 270mm;
+    padding: 0;
+    transform: none !important;
+    border-radius: 0;
+    box-shadow: none;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

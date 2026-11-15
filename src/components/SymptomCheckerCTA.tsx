@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { CALENDLY_URL } from '../config/site'
 import { openCalendlyPopup } from '../utils/openCalendly'
 
@@ -14,21 +15,20 @@ export default function SymptomCheckerCTA() {
           </span>
           <h2 className="mt-4 text-3xl font-display text-brand-deep md:text-[2.3rem]">Not sure where to start?</h2>
           <p className="mt-4 text-sm text-neutral-700">
-            Complete our five-minute symptom checker to understand your perimenopause rhythm and receive a tailored inbox
-            briefing.
+            Complete our five-minute menopause questionnaire, based on the Menopause Rating Scale and NICE guidance.
           </p>
           <p className="mt-3 text-sm text-neutral-700">
-            We’ll send a personalised action list, recommended protocols, and a curated playlist so you can stabilise
-            symptoms this month.
+            You’ll get a clear two-page report of your symptoms and history to print or save and take to your GP. Your
+            answers stay on your device.
           </p>
         </div>
         <div className="relative flex flex-col gap-4">
-          <a
-            href="#newsletter"
+          <Link
+            to="/menopause-assessment"
             className="inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold text-brand transition hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-sky/40 luxe-chip"
           >
             Take the symptom checker
-          </a>
+          </Link>
         <button
           type="button"
           onClick={() => openCalendlyPopup(CALENDLY_URL)}
