@@ -97,7 +97,7 @@ async function handler(req: any, res: any) {
       (await withinLimit(redis, `report_rl:ip:${forwarded}`, LIMIT_PER_IP_PER_HOUR, 3600)) &&
       (await withinLimit(redis, `report_rl:email:${emailHash}`, LIMIT_PER_EMAIL_PER_DAY, 86400))
     if (!allowed) {
-      res.status(429).json({ error: 'That is a lot of requests. Please try again later, or print your report instead.' })
+      res.status(429).json({ error: 'That is a lot of requests. Please try again later.' })
       return
     }
   } catch (error) {
@@ -125,12 +125,12 @@ async function handler(req: any, res: any) {
     })
     if (!response.ok) {
       console.error('send-report: provider rejected the email', response.status, await response.text())
-      res.status(502).json({ error: 'We could not send the email. Please try again, or print your report instead.' })
+      res.status(502).json({ error: 'We could not send the email. Please try again in a moment.' })
       return
     }
   } catch (error) {
     console.error('send-report: provider request failed', error)
-    res.status(502).json({ error: 'We could not send the email. Please try again, or print your report instead.' })
+    res.status(502).json({ error: 'We could not send the email. Please try again in a moment.' })
     return
   }
 

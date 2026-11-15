@@ -18,8 +18,7 @@ export default function SymptomCheckerCTA() {
             Complete our five-minute menopause questionnaire, based on the Menopause Rating Scale and NICE guidance.
           </p>
           <p className="mt-3 text-sm text-neutral-700">
-            You’ll get a clear two-page report of your symptoms and history to print, save or email to yourself and
-            take to your GP.
+            We’ll email you a clear report of your symptoms and history to take to your GP.
           </p>
         </div>
         <div className="relative flex flex-col gap-4">

@@ -7,6 +7,7 @@ import {
   CONDITION_OPTIONS,
   CONTRACEPTION_OPTIONS,
   CYCLE_OPTIONS,
+  DEMO_ANSWERS,
   DISCUSS_OPTIONS,
   DURATION_OPTIONS,
   EXERCISE_OPTIONS,
@@ -51,7 +52,7 @@ function joined(items: string[], empty = 'None reported') {
 }
 
 /** Lays a sheet out at true A4 size and scales it down to fit narrower screens. */
-function Sheet({ children, label }: { children: React.ReactNode; label: string }) {
+function Sheet({ children, label, height = SHEET_HEIGHT }: { children: React.ReactNode; label: string; height?: number }) {
   const frameRef = useRef<HTMLDivElement | null>(null)
   const [scale, setScale] = useState(1)
 
@@ -66,17 +67,29 @@ function Sheet({ children, label }: { children: React.ReactNode; label: string }
   }, [])
 
   return (
-    <div ref={frameRef} className="rpt-frame" style={{ height: SHEET_HEIGHT * scale }}>
-      <section className="rpt-sheet" aria-label={label} style={{ transform: `scale(${scale})` }}>
+    <div ref={frameRef} className="rpt-frame" style={{ height: height * scale }}>
+      <section className="rpt-sheet" aria-label={label} style={{ transform: `scale(${scale})`, height }}>
         {children}
       </section>
     </div>
   )
 }
 
-type Props = { answers: Answers; result: AssessmentResult; completedOn: Date }
+type Props = {
+  answers: Answers
+  result: AssessmentResult
+  completedOn: Date
+  /**
+   * Preview mode: only the header and summary are real. Everything below is blurred and
+   * filled with sample data, so the patient's detail cannot be read out of the page.
+   */
+  teaser?: boolean
+}
 
-export default function AssessmentReport({ answers: a, result, completedOn }: Props) {
+const TEASER_HEIGHT = 640
+
+export default function AssessmentReport({ answers: a, result, completedOn, teaser = false }: Props) {
+  const body = teaser ? DEMO_ANSWERS : a
   const name = [a.firstName, a.lastName].map((s) => s.trim()).filter(Boolean).join(' ')
   const dobLine = `${formatDate(a.dob)}${result.age !== null ? ` (${result.age} yrs)` : ''}`
   const measures = [
@@ -88,9 +101,20 @@ export default function AssessmentReport({ answers: a, result, completedOn }: Pr
   const bleeding = labelsFor(BLEEDING_OPTIONS, a.bleeding, true)
   const conditions = labelsFor(CONDITION_OPTIONS, a.conditions, true)
   const family = labelsFor(FAMILY_OPTIONS, a.family, true)
-  const otherSymptoms = labelsFor(OTHER_SYMPTOM_OPTIONS, a.otherSymptoms, true)
+  const otherSymptoms = labelsFor(OTHER_SYMPTOM_OPTIONS, body.otherSymptoms, true)
   const tried = labelsFor(TRIED_OPTIONS, a.tried, true)
-  const discuss = labelsFor(DISCUSS_OPTIONS, a.discuss, true)
+  const discuss = labelsFor(DISCUSS_OPTIONS, body.discuss, true)
+
+  // In preview mode the lower part of the page is decorative: blurred, inert and hidden from
+  // assistive technology.
+  const Lower = ({ children }: { children: React.ReactNode }) =>
+    teaser ? (
+      <div className="rpt-blur" aria-hidden>
+        {children}
+      </div>
+    ) : (
+      <>{children}</>
+    )
 
   const footBar = (page: number) => (
     <div className="rpt-foot-bar">
@@ -104,7 +128,7 @@ export default function AssessmentReport({ answers: a, result, completedOn }: Pr
   return (
     <div className="rpt-root">
       {/* ------------------------------ PAGE 1 ------------------------------ */}
-      <Sheet label="Report page 1 of 2">
+      <Sheet label={teaser ? 'Report preview' : 'Report page 1 of 2'} height={teaser ? TEASER_HEIGHT : undefined}>
         <div className="rpt-head">
           <img src={clinicAlphaLogo} alt="Clinic Alpha" />
           <div className="rpt-head-title">
@@ -165,6 +189,7 @@ export default function AssessmentReport({ answers: a, result, completedOn }: Pr
           </div>
         </div>
 
+        <Lower>
         <div className="rpt-section">
           <h3 className="rpt-h2">
             Symptom profile
@@ -185,18 +210,16 @@ export default function AssessmentReport({ answers: a, result, completedOn }: Pr
                   <React.Fragment key={domain.id}>
                     <tr className="rpt-group">
                       <td colSpan={2}>{domain.label}</td>
-                      <td>
-                        {domainScore.score} / {domain.max}
-                      </td>
+                      <td>{teaser ? '–' : `${domainScore.score} / ${domain.max}`}</td>
                     </tr>
                     {MRS_ITEMS.filter((item) => item.domain === domain.id).map((item) => {
-                      const value = a.mrs[item.id] ?? 0
+                      const value = body.mrs[item.id] ?? 0
                       return (
                         <tr key={item.id}>
                           <td>
                             <span className="rpt-sym">
                               {item.label}
-                              {a.topConcerns.includes(item.id) && <em>Most bothersome</em>}
+                              {body.topConcerns.includes(item.id) && <em>Most bothersome</em>}
                             </span>
                             <span className="rpt-sym-desc">{item.description}</span>
                           </td>
@@ -221,9 +244,9 @@ export default function AssessmentReport({ answers: a, result, completedOn }: Pr
             <h3 className="rpt-h2">Duration &amp; impact on life</h3>
             <div className="rpt-impact">
               <span>Symptoms present for</span>
-              <b>{labelFor(DURATION_OPTIONS, a.duration) || 'Not given'}</b>
+              <b>{labelFor(DURATION_OPTIONS, body.duration) || 'Not given'}</b>
               {IMPACT_AREAS.map((area) => {
-                const value = a[area.id]
+                const value = body[area.id]
                 return (
                   <React.Fragment key={area.id}>
                     <span>
@@ -264,14 +287,17 @@ export default function AssessmentReport({ answers: a, result, completedOn }: Pr
           </div>
           <div className="rpt-box">
             <h3 className="rpt-h2">My questions</h3>
-            <p className={`rpt-text${a.questions.trim() ? '' : ' rpt-muted'}`}>{a.questions.trim() || 'None added'}</p>
+            <p className={`rpt-text${body.questions.trim() ? '' : ' rpt-muted'}`}>{body.questions.trim() || 'None added'}</p>
           </div>
         </div>
 
-        <div className="rpt-foot">{footBar(1)}</div>
+        </Lower>
+
+        {!teaser && <div className="rpt-foot">{footBar(1)}</div>}
       </Sheet>
 
       {/* ------------------------------ PAGE 2 ------------------------------ */}
+      {!teaser && (
       <Sheet label="Report page 2 of 2">
         <div className="rpt-head rpt-head-compact">
           <div>
@@ -405,6 +431,7 @@ export default function AssessmentReport({ answers: a, result, completedOn }: Pr
           {footBar(2)}
         </div>
       </Sheet>
+      )}
     </div>
   )
 }

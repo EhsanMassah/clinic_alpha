@@ -312,16 +312,16 @@ export default function MenopauseAssessment() {
   // ------------------------------------------------------------ report view
   if (view === 'report') {
     return (
-      <div id="main" ref={topRef} tabIndex={-1} className="mx-auto max-w-5xl scroll-mt-28 px-4 py-10 focus:outline-none sm:px-6 print:max-w-none print:p-0">
-        <div className="mx-auto mb-8 max-w-[794px] print:hidden">
+      <div id="main" ref={topRef} tabIndex={-1} className="mx-auto max-w-5xl scroll-mt-28 px-4 py-10 focus:outline-none sm:px-6 print:hidden">
+        <div className="mx-auto mb-8 max-w-[794px]">
           <span className="inline-flex items-center gap-2 rounded-full px-4 py-1 text-xs uppercase tracking-[0.35em] text-ca-brand luxe-chip">
             <span className="h-2 w-2 rounded-full bg-ca-sky" aria-hidden />
             Your report is ready
           </span>
-          <h1 className="mt-4 font-display text-3xl text-ca-deep md:text-4xl">Take this to your GP appointment</h1>
+          <h1 className="mt-4 font-display text-3xl text-ca-deep md:text-4xl">Where shall we send your report?</h1>
           <p className="mt-3 text-sm text-ca-ink700">
-            Print it, save it as a PDF, or email it to yourself. Your answers stay on this device unless you choose to
-            email the report, and they disappear when you close or refresh this page, so keep a copy now.
+            Here is a preview. Enter your email address and we’ll send you the full report to print or show on your
+            phone at your GP appointment. Your answers disappear when you close or refresh this page, so send it now.
           </p>
 
           {(showUrgentBleeding || showMoodSupport) && (
@@ -342,21 +342,14 @@ export default function MenopauseAssessment() {
           )}
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <button
-              type="button"
-              onClick={() => window.print()}
+            <a
+              href="#email-report"
               className="inline-flex items-center gap-2 rounded-full bg-ca-deep px-6 py-3 text-sm font-semibold text-white shadow-glow-soft transition hover:bg-ca-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-sky/60"
             >
               <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden>
-                <path d="M6 7V3h8v4M6 14H4V8h12v6h-2M6 12h8v5H6v-5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                <path d="M3 5.5h14v9H3v-9Zm0 .5 7 5 7-5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
               </svg>
-              Print or save as PDF
-            </button>
-            <a
-              href="#email-report"
-              className="inline-flex items-center rounded-full border border-ca-line bg-white px-5 py-3 text-sm font-semibold text-ca-brand transition hover:border-ca-sky/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-sky/40"
-            >
-              Email it to me
+              Email me my report
             </a>
             <button
               type="button"
@@ -378,7 +371,23 @@ export default function MenopauseAssessment() {
           </div>
         </div>
 
-        <AssessmentReport answers={answers} result={result} completedOn={completedOn} />
+        <div className="rpt-teaser mx-auto max-w-[794px]">
+          <AssessmentReport teaser answers={answers} result={result} completedOn={completedOn} />
+          <div className="rpt-teaser-cta">
+            <div className="max-w-sm rounded-3xl border border-ca-line bg-white p-6 text-center shadow-[0_24px_60px_rgba(16,38,74,0.18)]">
+              <p className="font-display text-xl text-ca-deep">Your full report is ready</p>
+              <p className="mt-2 text-sm text-ca-ink700">
+                Symptom profile, history and points to discuss with your GP, sent straight to your inbox.
+              </p>
+              <a
+                href="#email-report"
+                className="mt-4 inline-flex items-center justify-center rounded-full bg-ca-deep px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-ca-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ca-sky/60"
+              >
+                Email me my report
+              </a>
+            </div>
+          </div>
+        </div>
 
         <EmailReport answers={answers} />
 
@@ -412,8 +421,8 @@ export default function MenopauseAssessment() {
             Your menopause symptom report, ready for your GP
           </h1>
           <p className="mt-4 text-base text-ca-ink700">
-            GP appointments are short. Answer a few questions and we’ll turn them into a clear two-page summary of your
-            symptoms, history and what you want to discuss, so nothing gets missed.
+            GP appointments are short. Answer a few questions and we’ll turn them into a clear summary of your
+            symptoms, history and what you want to discuss, emailed to you so nothing gets missed.
           </p>
 
           <ul className="mt-7 space-y-4 text-sm text-ca-ink700">
@@ -424,11 +433,11 @@ export default function MenopauseAssessment() {
               ],
               [
                 'Private by design',
-                'Your answers stay on this device. Nothing is sent to us unless you choose to email yourself the report, and your answers are never stored.',
+                'Your answers stay on this device until you ask us to email your report. They are used only to send it and are never stored.',
               ],
               [
                 'A report you can hand over',
-                'Print it, save it as a PDF, or email it to yourself. It is set out the way a clinician reads: summary first, detail after.',
+                'We email it to you to print or show on your phone. It is set out the way a clinician reads: summary first, detail after.',
               ],
             ].map(([title, body], index) => (
               <li key={title} className="flex gap-4">

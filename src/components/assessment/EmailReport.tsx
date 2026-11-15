@@ -3,7 +3,7 @@ import type { Answers } from '../../data/menopauseAssessment'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
-const FALLBACK_ERROR = 'We could not send the email. Please try again, or print your report instead.'
+const FALLBACK_ERROR = 'We could not send the email. Please try again in a moment.'
 
 function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)
@@ -55,7 +55,7 @@ export default function EmailReport({ answers }: { answers: Answers }) {
     <section
       id="email-report"
       aria-labelledby="email-report-title"
-      className="mx-auto mt-10 max-w-[794px] scroll-mt-28 rounded-[28px] bg-ca-deep p-7 text-white shadow-[0_30px_80px_rgba(16,38,74,0.25)] sm:p-9 print:hidden"
+      className="mx-auto mt-8 max-w-[794px] scroll-mt-28 rounded-[28px] bg-ca-deep p-7 text-white shadow-[0_30px_80px_rgba(16,38,74,0.25)] sm:p-9"
     >
       <h2 id="email-report-title" className="font-display text-2xl sm:text-[1.75rem]">
         Email me my report
@@ -77,7 +77,7 @@ export default function EmailReport({ answers }: { answers: Answers }) {
       ) : (
         <form onSubmit={onSubmit} noValidate className="mt-2">
           <p className="max-w-xl text-sm text-white/85">
-            Get a copy in your inbox to keep, print later, or open on your phone at your appointment.
+            Enter your email address and we’ll send your full report straight away, to print or open on your phone at your appointment.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <label className="flex-1">

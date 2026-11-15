@@ -29,7 +29,7 @@ export default function AssessmentPromo() {
             </h2>
             <p className="mt-4 max-w-xl text-base text-white/85">
               Answer a short questionnaire built on the Menopause Rating Scale and NICE guidance. You’ll get a clear
-              two-page summary of your symptoms, history and questions, so your appointment covers what matters.
+              summary of your symptoms, history and questions by email, so your appointment covers what matters.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
               <Link
@@ -41,7 +41,7 @@ export default function AssessmentPromo() {
                   <path d="M5 10h10m0 0-4-4m4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                 </svg>
               </Link>
-              <p className="text-sm text-white/75">Private: nothing is sent unless you email yourself the report.</p>
+              <p className="text-sm text-white/75">Your report is emailed to you. Your answers are never stored.</p>
             </div>
           </div>
 
